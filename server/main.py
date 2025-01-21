@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
+from alembic import command
+from alembic.config import Config
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,8 +13,15 @@ from core.models.db_helper import db_helper
 from crud.task import get_task, create_task, update_task
 
 
+
+async def run_migrations():
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    
     yield
     
     await db_helper.disponse()

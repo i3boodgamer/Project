@@ -20,6 +20,6 @@ services:
       - dev
   
   frontend:
-    build: ./client
+    build: ./client/vite-project
     networks:
       - dev

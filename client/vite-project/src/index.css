@@ -1,0 +1,83 @@
+/* Основные стили страницы */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Контейнер приложения */
+.app-container {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Заголовок */
+h1 {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+/* Ввод новой задачи */
+.input-container {
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Список задач */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #fff;
+  margin: 10px auto;
+  padding: 15px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+}
+
+/* Статус задачи */
+.task-status {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.task-status.pending {
+  color: #dc3545;
+}

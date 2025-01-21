@@ -1,0 +1,52 @@
+from contextlib import asynccontextmanager
+
+import uvicorn
+from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from core.schemas.task import TaskCreate
+from core.models import Task
+from core.models.db_helper import db_helper
+from crud.task import get_task, create_task, update_task
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    
+    await db_helper.disponse()
+
+
+main_app = FastAPI()
+
+origins = [
+    "http://localhost:5173",
+]
+
+main_app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@main_app.get("/tasks")
+async def get_tasks(session: AsyncSession = Depends(db_helper.session_getter)):
+    return await get_task(session)
+
+@main_app.post("/tasks")
+async def post_tasks(task: TaskCreate, session: AsyncSession = Depends(db_helper.session_getter)):
+    return await create_task(session, task)
+
+@main_app.put("/tasks/{task_id}")
+async def put_tasks(task_id: int, task: TaskCreate, session: AsyncSession = Depends(db_helper.session_getter)):
+    return await update_task(session, task_id, task)
+
+
+
+
+if __name__ == "__main__":
+    uvicorn.run(main_app, host="localhost", port=8000)

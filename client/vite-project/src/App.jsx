@@ -10,7 +10,7 @@ function App() {
   // Загрузка задач с бэкенда
   useEffect(() => {
     axios
-      .get("http://localhost:8000/tasks")  // URL вашего FastAPI сервера
+      .get("http://66.90.102.54/api/tasks")  // URL вашего FastAPI сервера
       .then((response) => {
         setTasks(response.data);  // Устанавливаем данные в состояние
       })
@@ -27,7 +27,7 @@ function App() {
     };
 
     axios
-      .post("http://localhost:8000/tasks", task)
+      .post("http://66.90.102.54/api/tasks", task)
       .then((response) => {
         setTasks([...tasks, response.data]);  // Добавляем новую задачу в список
         setNewDescription("");  // Очистить поле ввода description

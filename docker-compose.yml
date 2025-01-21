@@ -30,5 +30,7 @@ services:
       POSTGRES_USER: ${APP_CONFIG__DB__USER}
       POSTGRES_PASSWORD: ${APP_CONFIG__DB__PASS}  
       POSTGRES_DB: ${APP_CONFIG__DB__NAME} 
+    env_file:
+      - ./server/.env
     networks:
       - dev

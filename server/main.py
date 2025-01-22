@@ -15,8 +15,12 @@ from crud.task import get_task, create_task, update_task
 
 
 def run_migrations():
-    alembic_cfg = Config("alembic.ini")
-    command.upgrade(alembic_cfg, "head")
+    try: 
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+    except Exception as e:
+        print(e)
+        print("Проблема с созданием таблицы")
 
 
 

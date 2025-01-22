@@ -43,11 +43,11 @@ main_app.add_middleware(
 )
 
 
-@main_app.get("/tasks")
+@main_app.get("/api/tasks")
 async def get_tasks(session: AsyncSession = Depends(db_helper.session_getter)):
     return await get_task(session)
 
-@main_app.post("/tasks")
+@main_app.post("/api/tasks")
 async def post_tasks(task: TaskCreate, session: AsyncSession = Depends(db_helper.session_getter)):
     return await create_task(session, task)
 

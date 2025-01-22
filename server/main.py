@@ -20,8 +20,7 @@ def run_migrations() -> bool:
         command.upgrade(alembic_cfg, "head")
         
         return True
-    except Exception as e:
-        print(e)
+    except:
         return False
 
 

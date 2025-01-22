@@ -16,6 +16,8 @@ services:
 
   backend:
     build: ./server
+    ports:
+      - 8000:8000
     networks:
       - dev
   

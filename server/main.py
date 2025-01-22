@@ -14,14 +14,10 @@ from crud.task import get_task, create_task, update_task
 
 
 
-def run_migrations() -> bool:
-    try:
-        alembic_cfg = Config("alembic.ini")
-        command.upgrade(alembic_cfg, "head")
-        
-        return True
-    except:
-        return False
+def run_migrations():
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")
+
 
 
 @asynccontextmanager
@@ -64,6 +60,5 @@ async def put_tasks(task_id: int, task: TaskCreate, session: AsyncSession = Depe
 
 
 if __name__ == "__main__":
-    if not run_migrations():
-        print("Таблица не создалась")
+    run_migrations()
     uvicorn.run(main_app, host="0.0.0.0", port=8000)
